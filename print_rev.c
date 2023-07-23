@@ -1,32 +1,45 @@
 #include "main.h"
 
 /**
- * print_rev - writes the str in reverse
- * @arguments: input string
- * @buf: buffer pointer
- * @ibuf: index for buffer pointer
- * Return: number of chars printed.
+ * print_reverse - Prints reverse string.
+ * @types: Lista of arguments
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Numbers of chars printed
  */
-int print_rev(va_list arguments, char *buf, unsigned int ibuf)
+
+int print_reverse(va_list types, char buffer[],
+	int flags, int width, int precision, int size)
 {
 	char *str;
-	unsigned int i;
-	int j = 0;
-	char nill[] = "(llun)";
+	int i, count = 0;
 
-	str = va_arg(arguments, char *);
+	UNUSED(buffer);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(size);
+
+	str = va_arg(types, char *);
+
 	if (str == NULL)
 	{
-		for (i = 0; nill[i]; i++)
-			ibuf = handl_buf(buf, nill[i], ibuf);
-		return (6);
+		UNUSED(precision);
+
+		str = ")Null(";
 	}
 	for (i = 0; str[i]; i++)
 		;
-	j = i - 1;
-	for (; j >= 0; j--)
+
+	for (i = i - 1; i >= 0; i--)
 	{
-		ibuf = handl_buf(buf, str[j], ibuf);
+		char z = str[i];
+
+		write(1, &z, 1);
+		count++;
 	}
-	return (i);
+	return (count);
 }
+
